@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="./css/style.css">
+<title>Title</title>
+<style>
+.list {
+	list-style-type: none;
+	color: whitesmoke;
+
+	max-height: 600px;
+	
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+</style>
+</head>
+<body>
+		<div class="container-fluid home-content" style="height: 95vh; ">
+			<div class="row h-100">
+				<nav class="col-sm-3 col-md-3 col-lg-2 d-none d-md-block  sidebar">
+					<div class="sidebar-sticky d-flex flex-column justify-content-between" style="position: sticky; top: 0;height: 95vh;align-content:space-between">
+						<div class="col">
+						   <ul class="nav flex-column justify-content-center  mb-3  mb-auto">
+							   <li class="nav-item mt-2  w-100 justify-content-center align-items-center">
+								 <img src="./assets/Spotify_Logo_RGB_White.png"  class="image-fluid img-thumbnail border-0 rounded-0" width="80%" alt="spotify logo">
+							   </li>
+							   <li class="mt-3  nav-item active"><a  href="home.html"><i class="fa fa-home mr-3"></i>Home</a></li>
+							   <li class="mt-3  nav-item"><a href="albums.html"><i class="fa fa-search mr-3"></i>Search</a></li>
+							   <li class="mt-3  nav-item"><a href="albums.html"><i class="fa fa-book  mr-3"></i>Your Library</a></li>
+							 </ul>
+						</div>
+					  <div class="col d-flex flex-column ">
+							 <ul class="nav flex-column justify-content-center align-items-center w-100 mt-auto pb-5">
+							   <li class="nav-item w-100 mb-3  border-bottom border-light pb-2">
+								 <a href="#"><i class="fa fa-arrow-alt-circle-down"> </i> Install App</a> 
+							   </li> 
+							   <li class="nav-item w-100 mb-2 " >
+									<img src="./assets/diego.jpg"class="image-fluid img-thumbnail border-0 rounded-circle pr-2 " style="height: 3rem; object-fit: cover;" alt="profile picture"/>
+								   <div class=" d-sm-block d-md-block d-lg-inline " >
+									  <span class="" style="font-size:0.8rem">Diego 'Ziba' Banovaz</span>
+								   </div>
+							   </li>
+							 </ul>
+						   </div>
+						 </div>
+						
+				  </nav>
+			
+
+		  
+				<div class="col-sm-12 col-md-9 col-lg-10 music-list" id="playlistBackground">
+					<nav class="navbar navbar-expand-lg navbar-dark pt-3 mb-3">
+                 
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						  <span class="navbar-toggler-icon"></span>
+						</button>
+					  
+					   <div class="d-flex align-items-center m-auto">
+							<div class="collapse navbar-collapse artists" id="navbarSupportedContent">
+							  <ul class="navbar-nav m-auto ">
+								<li class="nav-item active mr-3">
+								  <a class="nav-link bolder" onclick="loadData('eminem')" href="#">Eminem <span class="sr-only">(current)</span></a>
+								</li>
+								<li class="nav-item mr-3">
+								  <a class="nav-link bolder" onclick="loadData('metallica')" href="#">Metallica</a>
+								</li>
+							   
+								<li class="nav-item mr-3">
+								  <a class="nav-link bolder" onclick="loadData('behemoth')" href="#" >Behemoth</a>
+								</li>
+								<li class="nav-item mr-3">
+									<form class="form-inline my-2 my-lg-0">
+										<input class="form-control mr-sm-2" type="search" id="search-artist" placeholder="Search" aria-label="Search">
+										<button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
+							 		 </form>
+								  </li>
+							  </ul>
+							  
+							 
+							</div>
+					   </div>
+					  </nav>
+					
+						<div class="row mb-5 mt-5">
+						<div class="col-sm-12 col-lg-5 album-cover" >
+							
+						</div>
+						<div class="col-sm-12 col-md-12 col-lg-7 pl-3" >
+							<ul class="list">
+
+							</ul>
+							
+							
+							
+						</div>
+						</div>
+						<div class="filter ml-5">
+							
+						</div>
+						<div class="row album-list row-cols-1 row-cols-md-2 row-cols-lg-4">
+								
+							</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid " id="mediaPlayer">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-3 mt-md-3">
+					<div class=" align-items-center d-none " id="musicInfo">
+						<div class="d-flex align-items-center w-100 py-2">
+							<img src="" class="image-fluid mr-2" style="max-width: 40px; "alt="">	
+							<div class="d-flex justify-content-start flex-column">
+								<span class="">Song Name</span>
+								<small class="">Artists Name</small>
+							</div>
+							<i class="fas fa-heart ml-3"></i>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12 col-md-12 col-lg-6 justify-content-between align-items-center pt-2 pb-2 mt-lg-3 mt-md-3">
+					<div class="w-100 d-flex align-items-baseline">
+						<small class="mr-2">30.00</small>
+						<div class="progress w-100 mb-2" style="height:0.1rem;">
+						 <div class="progress-bar w-75"  style="background-color:#93A0B0;" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<small class="ml-2">45.00</small>
+					  </div>
+					<div class="my-2 d-flex justify-content-center align-items-center">
+						<i class="fas fa-lg fa-random align-self-center"></i>
+						<i class="fas fa-2x fa-step-backward ml-4"></i>
+						<i class="far fa-3x fa-play-circle ml-4"></i>
+						<i class="fas fa-2x fa-step-forward ml-4"></i>
+						<i class="fas fa-lg fa-redo ml-4"></i>
+					</div>
+				
+				</div>
+				<div class="col-sm-6 col-md-3 col-lg-3 d-flex  justify-content-end align-items-center ">
+					<p class="mr-3"><i class="fas fa-list"></i></i></p>
+					<p class="mr-3"><i class="fas fa-desktop"></i></i></p>
+					
+					<div class="w-50 d-flex align-items-baseline">
+						<p class="mr-2 "><i class="fas fa-volume-up"></i></p>
+						<div class="progress w-100 mb-2" style="height:0.1rem;">
+						 <div class="progress-bar w-75"  style="background-color:#93A0B0;" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						
+					  </div>
+							
+				</div>
+			</div>
+		</div>
+
+
+<script>
+window.onload = function(){
+	let nav = document.querySelectorAll('.artists .nav-link')
+	nav.forEach(link => {
+		link.addEventListener('click', function() {
+			nav.forEach(element => {
+				element.closest('.nav-item').classList.remove('active')
+			});
+			let navItem = link.closest('.nav-item');
+			navItem.classList.toggle('active')
+		})
+	});
+	loadData("eminem")
+	let searchBtn =document.querySelector('.nav-item .btn') 
+	
+	searchBtn.addEventListener('click', function() {
+		let val = document.getElementById('search-artist').value
+		
+		loadData(val)
+	})
+}
+
+function loadData(artist_name) {
+		
+	fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${artist_name}`, {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
+			"x-rapidapi-key": "84d2e1bc2amsh0bcbc81dd32f547p1526bajsncbac98b453bc"
+				}
+		})
+		.then(response => response.json()).then(parsedJSON => {
+			console.log(parsedJSON.data)
+			const array=[]
+			const albumCover = document.querySelector('.album-cover')
+			const playlist=document.querySelector('.list')
+			parsedJSON.data.forEach(element => {
+				let li =`
+				<li class="d-flex  mb-3 justify-content-between" style="cursor:pointer">
+					<div class="d-flex flex-column">
+						<span class='song-title'><i class="fa fa-music mr-2" ></i>${element.title}</span>
+						<span class="ml-4 pt-0" style="color:#93A0B0" >${element.artist.name}</span>
+					</div>
+						<span class="mr-3">${element.duration/100}</span>
+				</li>
+				`;
+				array.push(li)
+			});
+			playlist.innerHTML=array.join('')
+			let albumListRow= document.querySelector('.album-list')
+			let songs =document.querySelectorAll('.song-title')
+			songs.forEach(song => {
+				song.addEventListener('click', function(e){
+					let songTitle=e.currentTarget.innerText;
+					parsedJSON.data.forEach(elem => {
+						if(elem.title==songTitle) {
+							let albumElement = `
+							<div class="image-wrapper mt-5 d-flex flex-column align-items-center justify-content-center" >
+								<img src="${elem.album.cover_big}" alt="..." class="img-thumbnail p-0 border-0 rounded-0" style="height: 20rem; object-fit: cover; transition: all 0.1s linear; box-shadow: 0 1px 5px rgba(0,0,0,.53);">
+								<span class="text-center" style="color:#93A0B0; font-size: 1rem;">${elem.album.title}</span>
+								<span class=" pt-0" style="color:#93A0B0; font-size: 1rem;">${elem.artist.name}</span>
+								<button type="button" class="btn btn-success rounded-pill mt-3 mb-2 " style="padding: 5px 50px; font-size: 1.2rem;">Album List</button>
+								<span class="mt-5 " style="color:#93A0B0; font-size: 2rem;"><i class="fas fa-heart ml-1 "></i></span>
+						</div>
+							`
+							
+							albumCover.innerHTML=albumElement
+							let btn = document.querySelector('.image-wrapper .btn')
+							btn.addEventListener('click', function(){
+								let filterParent =document.querySelector('.filter')
+								let filter = `<button type="button" class="btn btn-outline-secondary filter-btn ml-2 mb-3">Unique</button>`
+								
+								filterParent.innerHTML = filter;
+								const new_arr=[]
+								parsedJSON.data.forEach(alb => {
+
+									let cover = `
+											<div class="col mb-3 d-flex flex-column justify-content-center align-items-center">
+											<div class="image-wrapper albumsName" >
+												<img  src="${alb.album.cover_medium}"   class="image-fluid img-thumbnail border-0 p-0 rounded-0" style="min-width:15rem"  alt="album ">
+												<i  class="fa fa-play-circle d-none play-btn"></i>
+											</div>
+											<span class="mt-2 text-center" style="color: whitesmoke; font-weight: 500;">${alb.album.title}</span>
+											<span style="color: #93A0B0;">${alb.artist.name}</span>
+											</div>
+									`;
+									new_arr.push(cover)
+								})
+								albumListRow.innerHTML=new_arr.join('')
+								
+								playBtn()
+								let filterBtn= document.querySelector('.filter-btn')
+								filterBtn.addEventListener('click', function( ){
+									const filtered =[]
+									const map =new Map();
+									for(const item of parsedJSON.data) {
+										if(!map.has(item.album.title)) {
+											map.set(item.album.title, true)
+											filtered.push({
+												title:item.album.title,
+												cover: item.album.cover_medium,
+												artist:item.artist.name
+											})
+										}
+									}
+									console.log(filtered)
+									const arr=[]
+									filtered.forEach(unique => {
+										let cover = `
+											<div class="col mb-3 d-flex flex-column justify-content-center align-items-center">
+											<div class="image-wrapper albumsName" >
+												<img  src="${unique.cover}"   class="image-fluid img-thumbnail border-0 p-0 rounded-0" style="min-width:15rem"  alt="album ">
+												<i  class="fa fa-play-circle d-none play-btn"></i>
+											</div>
+											<span class="mt-2 text-center" style="color: whitesmoke; font-weight: 500;">${unique.title}</span>
+											<span style="color: #93A0B0;">${unique.artist}</span>
+											</div>
+									`;
+									arr.push(cover)
+									});
+									albumListRow.innerHTML=arr.join('')
+								})
+							})
+							
+						}
+					});
+				})
+			});
+		})
+}
+
+function playBtn() {
+	let imageWrapper =document.querySelectorAll('.image-wrapper');
+          let palyBtn = document.querySelectorAll("img + i")
+          imageWrapper.forEach((image,index)=> {
+            image.addEventListener('mouseover', function(){
+              palyBtn[index-1].classList.remove("d-none")
+            })
+            image.addEventListener('mouseout', function(){
+              palyBtn[index-1].classList.add("d-none")
+            })
+          })
+
+}
+function search() {
+	let searchBtn =document.querySelector('.nav-item .btn') 
+	let value = document.querySelector('.nav-item input').value
+	searchBtn.addEventListener('click', function() {
+		loadData(value)
+	})
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
