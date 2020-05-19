@@ -184,9 +184,11 @@
 
 <script>
 window.onload = function(){
+	
 	let nav = document.querySelectorAll('.artists .nav-link')
 	nav.forEach(link => {
 		link.addEventListener('click', function() {
+			let section = document.querySelector('.album-cover').innerHTML='';
 			nav.forEach(element => {
 				element.closest('.nav-item').classList.remove('active')
 			});
@@ -310,6 +312,8 @@ function loadData(artist_name) {
 					});
 				})
 			});
+		}).catch(err => {
+			alert('no data found')
 		})
 }
 
