@@ -158,6 +158,25 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
         </div>
       </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <img class="img-fluid img-thumbnail modal-img" style="min-height:15rem; object-fit:cover" src="" alt="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="text-muted">
@@ -199,14 +218,14 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
                 
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <button type="button" class="btn btn-sm btn-outline-secondary view-btn" data-toggle="modal" data-target="#exampleModal">
                       View
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">
-                      Edit
+                      Hide
                     </button>
                   </div>
-                  <small class="text-muted">${image.id}</small>
+                  <small class="text-muted img-id">${image.id}</small>
                 </div>
               </div>
             </div>
@@ -215,7 +234,16 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
             arrayOfImages.push(card);
           });
           albumSection.innerHTML = arrayOfImages.join('')
-         
+         let modalBtns= document.querySelectorAll('.view-btn')
+         let modalTitle=document.querySelector('.modal-title')
+         let modalImg=document.querySelector('.modal-img')
+
+         modalBtns.forEach((btn, index) => {
+           btn.addEventListener('click', function () {
+            modalTitle.innerText=parsedJSON.images[index].id
+            modalImg.src=parsedJSON.images[index].url
+           })
+         });
         })
       }
   </script>
