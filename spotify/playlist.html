@@ -18,6 +18,7 @@
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
+	overflow-x: hidden;
 
 }
 /* width */
@@ -125,7 +126,7 @@
 						<div class="filter ml-5">
 							
 						</div>
-						<div class="row album-list row-cols-1 row-cols-md-2 row-cols-lg-4">
+						<div class="row album-list row-cols-1 row-cols-md-2 row-cols-lg-4  align-items-start">
 								
 							</div>
 					
@@ -216,6 +217,7 @@ function loadData(artist_name) {
 				}
 		})
 		.then(response => response.json()).then(parsedJSON => {
+			
 			console.log(parsedJSON.data)
 			const array=[]
 			const albumCover = document.querySelector('.album-cover')
@@ -232,6 +234,7 @@ function loadData(artist_name) {
 				`;
 				array.push(li)
 			});
+			fetch(parsedJSON.data[0].album.tracklist).then(response=> console.log(response))
 			playlist.innerHTML=array.join('')
 			let albumListRow= document.querySelector('.album-list')
 			let songs =document.querySelectorAll('.song-title')
@@ -312,9 +315,10 @@ function loadData(artist_name) {
 					});
 				})
 			});
-		}).catch(err => {
-			alert('no data found')
 		})
+		// }).catch(err => {
+		// 	alert('no data found')
+		// })
 }
 
 function playBtn() {
