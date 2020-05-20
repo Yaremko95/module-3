@@ -221,7 +221,7 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
                     <button type="button" class="btn btn-sm btn-outline-secondary view-btn" data-toggle="modal" data-target="#exampleModal">
                       View
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <button type="button" class="btn btn-sm btn-outline-secondary hide-btn">
                       Hide
                     </button>
                   </div>
@@ -235,6 +235,7 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
           });
           albumSection.innerHTML = arrayOfImages.join('')
          let modalBtns= document.querySelectorAll('.view-btn')
+         let hideBtns= document.querySelectorAll('.hide-btn')
          let modalTitle=document.querySelector('.modal-title')
          let modalImg=document.querySelector('.modal-img')
 
@@ -244,6 +245,12 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
             modalImg.src=parsedJSON.images[index].url
            })
          });
+         hideBtns.forEach(btn => {
+           btn.addEventListener('click', function() {
+             btn.closest('.col-md-4').remove()
+           })
+         });
+
         })
       }
   </script>
