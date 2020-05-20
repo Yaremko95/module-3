@@ -217,6 +217,7 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
       }
     
       function loadImages(query) {
+
         fetch(`http://www.splashbase.co/api/v1/images/search?query=${query}`).then(response=> response.json()).then(parsedJSON=> {
           console.log(parsedJSON)
           let albumSection=document.querySelector('.album .container .row')
@@ -244,6 +245,7 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
             `;
             arrayOfImages.push(card);
           });
+          alertTimeout(`${arrayOfImages.length} images loaded`, 5000)
           albumSection.innerHTML = arrayOfImages.join('')
          let modalBtns= document.querySelectorAll('.view-btn')
          let hideBtns= document.querySelectorAll('.hide-btn')
@@ -252,6 +254,7 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
 
          modalBtns.forEach((btn, index) => {
            btn.addEventListener('click', function () {
+
             modalTitle.innerText=parsedJSON.images[index].id
             modalImg.src=parsedJSON.images[index].url
            })
@@ -276,8 +279,19 @@ jhsdhjhvbdk;shvdkhjhskldkvgjbaksjlkd
          });
 
 
-        })
-      }
+        }
+
+        function alertTimeout(mymsg,mymsecs)
+          {
+          var myelement = document.createElement("div");
+          myelement.setAttribute("style","background-color: whitesmoke;color:black; width: 450px;height: 200px;position: absolute;top:0;bottom:0;left:0;right:0;margin:auto;border: 1px solid black;font-family:arial;font-size:25px;font-weight:bold;display: flex; align-items: center; justify-content: center; text-align: center;");
+          myelement.innerHTML = mymsg;
+          setTimeout(function(){
+            myelement.parentNode.removeChild(myelement);
+          },mymsecs);
+          document.body.appendChild(myelement);
+          }
+      
   </script>
 </body>
 
