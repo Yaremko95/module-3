@@ -182,12 +182,10 @@
   </script>
   <script>
       window.onload=function() {
-<<<<<<< Updated upstream
-        fetch("http://www.splashbase.co/api/v1/images/search?query=laptop").then(response=> response.json()).then(parsedJSON=> {
-          console.log(parsedJSON)
-=======
+       
         
       }
+    
       function loadImages(query) {
         fetch(`http://www.splashbase.co/api/v1/images/search?query=${query}`).then(response=> response.json()).then(parsedJSON=> {
           console.log(parsedJSON)
@@ -218,7 +216,6 @@
           });
           albumSection.innerHTML = arrayOfImages.join('')
          
->>>>>>> Stashed changes
         })
       }
   </script>
