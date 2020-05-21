@@ -218,7 +218,7 @@ function loadData(artist_name) {
 		})
 		.then(response => response.json()).then(parsedJSON => {
 			
-			console.log(parsedJSON.data)
+			console.log(parsedJSON)
 			const array=[]
 			const albumCover = document.querySelector('.album-cover')
 			const playlist=document.querySelector('.list')
