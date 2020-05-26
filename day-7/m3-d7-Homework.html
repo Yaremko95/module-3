@@ -140,7 +140,7 @@
           let SelectedValue = selector.options[selector.selectedIndex].value;
           let response;
           table.innerHTML =''
-  
+          try {
             response = await fetch(`https://jsonplaceholder.typicode.com/users`);
             if(response.ok) {
                 let data = await response.json()
@@ -168,9 +168,27 @@
                     });
                   } 
 
-            }
+            } 
+          }catch (exception) {
+            console.log('problem')
+          }
 
           
+        }
+
+
+        async function extractNames() {
+          try {
+            response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+            if(response.ok) {
+              let data = await response.json()
+            
+             let array = [... data.map(user => user.name)]
+             console.log(array)
+            }
+          }catch (error) {
+
+          }
         }
     </script>
   </body>
