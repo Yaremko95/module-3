@@ -72,6 +72,7 @@
     </nav>
 
     <div class="container">
+      <button type="button" class="btn btn-secondary my-4 sort desc" onclick="sortByName()">Sort in <span class="sort-how">Desceding order</span></button>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -206,6 +207,40 @@
           }catch (error) {
 
           }
+        }
+        async function sortByName() {
+          let table = document.querySelector('.table tbody')
+          let sortBtn = document.querySelector('.sort')
+          let span = document.querySelector('.sort-how')
+          sortBtn.classList.toggle('desc');
+          table.innerHTML=''
+          try {
+            response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+            if(response.ok) {
+              let data = await response.json()
+              let arr =[...data]
+             
+               if(!sortBtn.classList.contains('desc')) {
+                  span.innerText = 'Acseding Order'
+                  arr.sort((a, b) => a.name<b.name? 1 : -1) 
+                  console.log(arr)
+                  arr.forEach(user => {
+                    table.innerHTML += createRow(user)
+                  });
+              } else {
+                  span.innerText = 'Desceding Order'
+                  arr.sort((a, b) => a.name>b.name? 1 : -1) 
+                  console.log(arr)
+                  arr.forEach(user => {
+                    table.innerHTML += createRow(user)
+                  });
+              }
+            }
+         
+            } catch (error) {
+
+          }
+        
         }
     </script>
   </body>
