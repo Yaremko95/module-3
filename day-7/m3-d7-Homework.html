@@ -190,6 +190,23 @@
 
           }
         }
+
+        async function addrestoStr () {
+          try {
+            response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+            if(response.ok) {
+              let data = await response.json()
+            data.forEach(addr => {
+               let {city, street, suite, zipcode}=addr.address
+              let addressStr =[city, street, suite, zipcode, ...Object.values( Object.values(addr.address).find(val => typeof val=='object'))].join(', ')
+                console.log(addressStr)
+            });
+         
+            }
+          }catch (error) {
+
+          }
+        }
     </script>
   </body>
 </html>
