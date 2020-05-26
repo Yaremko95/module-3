@@ -39,6 +39,58 @@
   </head>
   <body>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container ">
+      <a class="navbar-brand" href="#">Users</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+           
+           
+            <li class="nav-item mr-3">
+              <select class="custom-select custom-select-sm mb-3" style="height:calc(1.5em + .75rem + 5px) !important;">
+                <option selected>Filter by</option>
+                <option value="1">name</option>
+                <option value="2">username</option>
+                <option value="3">email</option>
+              </select>
+            </li>
+           <li class="nav-item">
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+          </form>
+           </li>
+          </ul>
+         
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">username</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">address</th>
+            <th scope="col">company</th>
+            <th scope="col">phone</th>
+            <th scope="col">website</th>
+          </tr>
+        </thead>
+        <tbody>
+     
+       
+        </tbody>
+      </table>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -46,7 +98,44 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
-    
+        window.onload = async function() {
+          let table = document.querySelector('.table tbody')
+          let response = await fetch('https://jsonplaceholder.typicode.com/users');
+          if(response.ok) {
+           
+            let data = await response.json()
+            console.log(data)
+
+             
+            data.forEach(user => {
+              createRow(user);
+              table.innerHTML+= createRow(user);
+            });
+            
+          }
+        }
+
+        let createRow = (userInfo) =>{
+          let {city, street, suite, zipcode}=userInfo.address
+          let addressStr =[city, street, suite, zipcode, ...Object.values( Object.values(userInfo.address).find(val => typeof val=='object'))].join(', ')
+          let row=`
+          <tr>
+            <th scope="row">${userInfo.id}</th>
+            <td>${userInfo.username}</td>
+            <td>${userInfo.name}</td>
+            <td>${userInfo.email}</td>
+            <td >${addressStr}</td>
+            <td>${[... Object.values(userInfo.company)]}</td>
+            <td>${userInfo.phone}</td>
+            <td>${userInfo.website}</td>
+          </tr>
+          `
+          return row;
+        }
+
+        const filter =() => {
+            
+        }
     </script>
   </body>
 </html>
