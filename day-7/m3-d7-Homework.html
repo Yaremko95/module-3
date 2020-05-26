@@ -121,10 +121,10 @@
           let addressStr =[city, street, suite, zipcode, ...Object.values( Object.values(userInfo.address).find(val => typeof val=='object'))].join(', ')
           let row=`
           <tr>
-            <th scope="row">${userInfo.id}</th>
-            <td>${userInfo.username}</td>
-            <td>${userInfo.name}</td>
-            <td>${userInfo.email}</td>
+            <th scope="row"><a>${userInfo.id}</a></th>
+            <td><a href="user_page.html?id=${userInfo.id}">${userInfo.username}</a></td>
+            <td><a href="user_page.html?id=${userInfo.id}">${userInfo.name}</a></td>
+            <td><a href="user_page.html?id=${userInfo.id}">${userInfo.email}</a></td>
             <td >${addressStr}</td>
             <td>${[... Object.values(userInfo.company)]}</td>
             <td>${userInfo.phone}</td>
