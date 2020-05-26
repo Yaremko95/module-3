@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+<link rel="stylesheet" href="/day-4/style.css">
     <title>Hello, world!</title>
   </head>
   <style>
@@ -35,8 +35,8 @@
     background-color: white;
 	position: absolute;
 	top: 60px;
-	right: 0;
-	transition: all 0.3s linear;
+	right: 300px;
+	/* transition: all 0.3s linear; */
 	z-index:25;
 
 	visibility:hidden;
@@ -49,14 +49,14 @@
 	/*height: 100%;*/
 	position: absolute;
 	top: 60px;
-	right: 0;
+	right: 300px;
 	overflow: scroll;
 	z-index: 26;
 	box-shadow: 0 0 5px #333;
-	transition: all 0.3s linear;
+	/* transition: all 0.3s linear; */
 	background: white;
 	padding: 0.5rem 1rem;
-	transform: translateX(100%);
+	/* transform: translateX(100%); */
 }
 .showCart {
 	transform: rotateX(0);
@@ -157,8 +157,10 @@
                     
                             let card = `
                     <div class="col-md-4">
+                        
                         <div class="card mb-4 shadow-sm">
-                            <img src="${book.img}" alt="..." class="img-thumbnail p-0 border-0 rounded-0" style="height: 30rem; object-fit: cover; transition: all 0.1s linear; box-shadow: 0 1px 5px rgba(0,0,0,.53);">
+                            <span class="badge badge-success py-2 d-none">In Cart</span>
+                            <img src="${book.img}" alt="..." class="" style="height: 30rem; object-fit: cover; transition: all 0.1s linear; box-shadow: 0 1px 5px rgba(0,0,0,.53);">
                         <div class="card-body">
                            <a href="cart.html?bookId=${book.asin}"> <p class="card-text">
                             ${book.title}
@@ -185,7 +187,7 @@
              
                     addToCartBtns.forEach((btn, index) => {
                         btn.addEventListener('click', function() {
-                        addToCart(loadedBooks[index])
+                        addToCart(loadedBooks[index], index)
                         })
                     });
             
@@ -200,7 +202,11 @@
        
         }
        
-       function addToCart(data) {
+       function addToCart(data, index) {
+           let badge = document.querySelectorAll('.badge')
+           let col = document.querySelectorAll('.col-md-4')
+            badge[index].classList.remove('d-none')
+            col[index].style.border='1px solid green'
            let cartSection= document.querySelector('.cart')
            let cartWrapper = document.querySelector('.cart-overlay')
               let card = `
@@ -221,7 +227,7 @@
                         </div>
                     </div>
                     `;
-                    cartSection.classList.add('showCart')
+                    cartSection.classList.add('slide-in-right')
                     cartWrapper.classList.add('transparentBCG')
 
                     cartSection.innerHTML += card;
