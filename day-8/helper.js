@@ -63,6 +63,12 @@ const saveEvent = async (agendaEvent) => {
   }
 
  const submitEvent = async() => {
+    let nameInput= document.querySelector("#name")
+    let descInput= document.querySelector('#description')
+    let brandInput =document.querySelector('#brand')
+    let imageInput = document.querySelector('#imageUrl')
+    let priceInput = document.querySelector('#price')
+
         let object = {
             name: document.querySelector("#name").value,
             description: document.querySelector('#description').value,
@@ -72,10 +78,26 @@ const saveEvent = async (agendaEvent) => {
         }
 
         let response = await saveEvent(object)
-        console.log(response)
+       
+        
         if(response.ok) {
-            alert('ok')
+            location.assign("marketing.html");
         }else {
-            alert('not ok')
+            let error = await response.json()
+           if (Object.keys(error.error.errors).includes('name')) {
+               nameInput.classList.add('is-invalid')
+           } 
+           if (Object.keys(error.error.errors).includes('description')) {
+            descInput.classList.add('is-invalid')
+            }
+            if (Object.keys(error.error.errors).includes('brand')) {
+                brandInput.classList.add('is-invalid')
+            }
+            if (Object.keys(error.error.errors).includes('imageUrl')) {
+                imageInput.classList.add('is-invalid')
+            }
+            if (Object.keys(error.error.errors).includes('price')) {
+                priceInput.classList.add('is-invalid')
+            }
         }
  }
