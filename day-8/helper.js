@@ -25,7 +25,25 @@ const getData= async () => {
    
 }
 
-const saveEvent = async (agendaEvent) => {
+const getProduct = async (id) => {
+    let response = await fetch(url + id, {
+        "method": "GET",
+        "headers": {
+            "Authorization": "Basic " + btoa('user27:ZGDWyFCA8umbgpvZ')}
+      });
+      try {
+        if(response.ok) {
+        let product = await response.json()
+        return product
+         } 
+      } catch(error) {
+          
+      }
+    
+     
+  }
+
+const saveProduct = async (agendaEvent) => {
     let response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(agendaEvent),
@@ -36,13 +54,41 @@ const saveEvent = async (agendaEvent) => {
     });
     return response;
   };
+  const updatePoduct = async (object, id) =>{
+    let response = await fetch(url + id, {
+        method: "PUT",
+        body: JSON.stringify(object),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa('user27:ZGDWyFCA8umbgpvZ')
+        }),
+      });
+      return response;
+ }
 
+ const deleteProduct =async (id) => {
+     
+     try {
+        let response = await fetch(url + id, {
+            method: "DELETE",
+            "headers": {
+                "Authorization": "Basic " + btoa('user27:ZGDWyFCA8umbgpvZ')},
+          
+        });
+        if(response.ok) {
+            location.assign("marketing.html");
+        }
+     }catch (error) {
+         alert ('can nott delete')
+     }
+   
+ }
 
   const createRow =(productInfo)=> {
     let row=`
     <tr>
       <th scope="row">${productInfo._id}</th>
-      <td>${productInfo.name}</td>
+      <td><a href="details.html?id=${productInfo._id}">${productInfo.name}</a></td>
       <td>${productInfo.description}</td>
       <td>${productInfo.brand}</td>
       <td ><img src="${productInfo.imageUrl}" alt="" class="image-fluid" style="max-height: 10rem;"></td>
@@ -62,13 +108,15 @@ const saveEvent = async (agendaEvent) => {
     submitEvent();
   }
 
+ 
+
  const submitEvent = async() => {
     let nameInput= document.querySelector("#name")
     let descInput= document.querySelector('#description')
     let brandInput =document.querySelector('#brand')
     let imageInput = document.querySelector('#imageUrl')
     let priceInput = document.querySelector('#price')
-
+    let response
         let object = {
             name: document.querySelector("#name").value,
             description: document.querySelector('#description').value,
@@ -76,8 +124,11 @@ const saveEvent = async (agendaEvent) => {
             imageUrl: document.querySelector('#imageUrl').value,
             price: document.querySelector('#price').value,
         }
-
-        let response = await saveEvent(object)
+        if(!prod_id) {
+             response = await saveProduct(object)
+        } else {
+            response= await updatePoduct(object,  prod_id)
+        }
        
         
         if(response.ok) {
@@ -100,4 +151,6 @@ const saveEvent = async (agendaEvent) => {
                 priceInput.classList.add('is-invalid')
             }
         }
+        
  }
+
