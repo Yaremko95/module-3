@@ -66,6 +66,7 @@ const saveProduct = async (agendaEvent) => {
       return response;
  }
 
+ 
  const deleteProduct =async (id) => {
      
      try {
